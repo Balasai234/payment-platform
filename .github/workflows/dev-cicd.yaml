@@ -38,10 +38,10 @@ jobs:
         uses: aws-actions/amazon-ecr-login@v1
       - name: Tag and Push Docker image to ECR
         env:
-          REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-          REPOSITORY: payment-platform
-          IMAGE_TAG: ${{ github.sha }}
+         REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+         REPOSITORY: payment-platform
+         IMAGE_TAG: ${{ github.sha }}
         run: |
-          docker tag payment-platform:${{ github.sha }} ${{ secrets.ECR_REGISTRY }}/payment-platform:${{ github.sha }}
-          docker push ${{ secrets.ECR_REGISTRY }}/payment-platform:${{ github.sha }}
+         docker tag payment-platform:${IMAGE_TAG} ${REGISTRY}/${REPOSITORY}:${IMAGE_TAG}
+         docker push ${REGISTRY}/${REPOSITORY}:${IMAGE_TAG}
 
