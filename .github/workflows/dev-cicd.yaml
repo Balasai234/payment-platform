@@ -51,7 +51,7 @@ jobs:
         with:
           repository: Balasai234/payment-platform-gitops
           path: payment-platform-gitops
-          token: ${{ secrets.GITHUB_TOKEN }
+          token: ${{ secrets.GITHUB_TOKEN }}
       - name: Update image tag
         run: |
           cd payment-platform-gitops/payment-platform
