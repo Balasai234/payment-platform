@@ -46,4 +46,23 @@ jobs:
         run: |
          docker tag payment-platform:${IMAGE_TAG} ${REGISTRY}/${REPOSITORY}:${IMAGE_TAG}
          docker push ${REGISTRY}/${REPOSITORY}:${IMAGE_TAG}
+      - name: checkout GitOps repository
+        uses: actions/checkout@v4
+        with:
+          repository: Balasai234/payment-platform-gitops
+          path: payment-platform-gitops
+          token: ${{ secrets.GITHUB_TOKEN }
+            - name: Update image tag
+        run: |
+          cd payment-platform-gitops/payment-platform
+          sed -i "s/newTag:.*/newTag: ${GITHUB_SHA}/" kustomization.yaml
 
+      - name: Commit and push GitOps changes
+        run: |
+          cd payment-platform-gitops
+          git config user.name "Balasai234"
+          git config user.email "balasaicheni7@gmail.com"
+
+          git add .
+          git diff --cached --quiet || git commit -m "Update payment-platform image to ${GITHUB_SHA}"
+          git push
