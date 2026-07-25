@@ -52,7 +52,7 @@ jobs:
           repository: Balasai234/payment-platform-gitops
           path: payment-platform-gitops
           token: ${{ secrets.GITHUB_TOKEN }
-            - name: Update image tag
+      - name: Update image tag
         run: |
           cd payment-platform-gitops/payment-platform
           sed -i "s/newTag:.*/newTag: ${GITHUB_SHA}/" kustomization.yaml
