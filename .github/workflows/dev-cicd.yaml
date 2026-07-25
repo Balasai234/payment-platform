@@ -65,4 +65,4 @@ jobs:
 
           git add .
           git diff --cached --quiet || git commit -m "Update payment-platform image to ${GITHUB_SHA}"
-          git push
+          git push 
