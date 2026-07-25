@@ -1,4 +1,4 @@
-Name: Payment Platform Dev CI/CD
+name: Payment Platform Dev CI/CD
 on:
   push:
     branches:
