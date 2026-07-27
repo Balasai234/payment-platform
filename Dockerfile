@@ -7,12 +7,4 @@ COPY opentelemetry-javaagent.jar /otel/opentelemetry-javaagent.jar
 
 EXPOSE 8080
 
-ENTRYPOINT [
-  "java",
-  "-javaagent:/otel/opentelemetry-javaagent.jar",
-  "-Dotel.service.name=payment-platform",
-  "-Dotel.exporter.otlp.endpoint=http://otel-collector-opentelemetry-collector.observability.svc.cluster.local:4317",
-  "-Dotel.exporter.otlp.protocol=grpc",
-  "-jar",
-  "app.jar"
-]
+ENTRYPOINT ["java","-javaagent:/otel/opentelemetry-javaagent.jar","-Dotel.service.name=payment-platform","-Dotel.exporter.otlp.endpoint=http://otel-collector-opentelemetry-collector.observability.svc.cluster.local:4317","-Dotel.exporter.otlp.protocol=grpc","-jar","app.jar"]
